@@ -1,17 +1,19 @@
-import 'package:ewaste_admin/pages/afterLoginLayout.dart';
-import 'package:ewaste_admin/pages/auth/login_page.dart';
-import 'package:ewaste_admin/pages/auth/signup_page.dart';
-import 'package:ewaste_admin/pages/sampah_didonasikan/detail_sampah_didonasikan.dart';
-import 'package:ewaste_admin/pages/sampah_didonasikan/sampah_didonasikan.dart';
-import 'package:ewaste_admin/pages/sampah_dibuang/detail_sampah_dibuang.dart';
-import 'package:ewaste_admin/pages/sampah_dibuang/sampah_dibuang.dart';
-import 'package:ewaste_admin/pages/landing_page.dart';
-import 'package:ewaste_admin/pages/splash_page.dart';
+import 'package:ewaste_droppoin/pages/afterLoginLayout.dart';
+import 'package:ewaste_droppoin/pages/auth/login_page.dart';
+import 'package:ewaste_droppoin/pages/auth/signup_page.dart';
+import 'package:ewaste_droppoin/pages/sampah_didonasikan/detail_sampah_didonasikan.dart';
+import 'package:ewaste_droppoin/pages/sampah_didonasikan/sampah_didonasikan.dart';
+import 'package:ewaste_droppoin/pages/sampah_dibuang/detail_sampah_dibuang.dart';
+import 'package:ewaste_droppoin/pages/sampah_dibuang/sampah_dibuang.dart';
+import 'package:ewaste_droppoin/pages/landing_page.dart';
+import 'package:ewaste_droppoin/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Supabase.initialize(
     url: 'https://oexltokstwraweaozqav.supabase.co',
     anonKey:
@@ -20,7 +22,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-final supabase = Supabase.instance.client;
+  final supabase = Supabase.instance.client;
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[

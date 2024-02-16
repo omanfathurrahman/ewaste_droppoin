@@ -1,4 +1,4 @@
-import 'package:ewaste_admin/main.dart';
+import 'package:ewaste_droppoin/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -21,6 +21,9 @@ class LoginPageState extends State<LoginPage> {
       password: password,
     );
     user = res.user;
+    // ignore: use_build_context_synchronously
+    context.go('/sampahDibuang');
+
   }
 
   @override

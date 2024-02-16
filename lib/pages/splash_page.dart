@@ -1,4 +1,4 @@
-import 'package:ewaste_admin/main.dart';
+import 'package:ewaste_droppoin/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

@@ -1,4 +1,4 @@
-import 'package:ewaste_admin/main.dart';
+import 'package:ewaste_droppoin/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,8 +12,21 @@ class SampahDibuangPage extends StatefulWidget {
 class _SampahDibuangPageState extends State<SampahDibuangPage> {
   var sampahDibuang = supabase.from('sampah_dibuang').select('''
     id,
-    status_dibuang
-    ''').eq('status_dibuang', "Belum diserahkan");
+    status_dibuang,
+    profile(
+      nama_lengkap
+    )
+    ''').eq('status_dibuang', "Belum diserahkan").eq('pilihan_antar_jemput', "diantar");
+
+  @override
+  void initState()  {
+    _tes();
+    super.initState();
+  }
+
+  Future<void> _tes() async {
+    print(await sampahDibuang);
+  }
 
   Future<void> _konfirmasi(num id) async {
     await supabase
@@ -24,7 +37,7 @@ class _SampahDibuangPageState extends State<SampahDibuangPage> {
       sampahDibuang = supabase.from('sampah_dibuang').select('''
         id,
         status_dibuang
-        ''').eq('status_dibuang', "Belum diserahkan");
+        ''').eq('status_dibuang', "Belum diserahkan").eq('pilihan_antar_jemput', "diantar");
     });
   }
 
@@ -43,9 +56,9 @@ class _SampahDibuangPageState extends State<SampahDibuangPage> {
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else {
-                    final data = snapshot.data as List;
+                    final listSampahDibuang = snapshot.data as List;
                     return Column(
-                      children: data
+                      children: listSampahDibuang
                           .map((itemSampahDibuang) => Card(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -60,6 +73,7 @@ class _SampahDibuangPageState extends State<SampahDibuangPage> {
                                         children: [
                                           Text(
                                               "Id: ${itemSampahDibuang['id'].toString()}"),
+                                          Text(itemSampahDibuang['profile']['nama_lengkap']),
                                           const Text("Sampah belum diterima"),
                                         ],
                                       ),
