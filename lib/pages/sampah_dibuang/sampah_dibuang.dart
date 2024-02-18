@@ -10,22 +10,44 @@ class SampahDibuangPage extends StatefulWidget {
 }
 
 class _SampahDibuangPageState extends State<SampahDibuangPage> {
-  var sampahDibuang = supabase.from('sampah_dibuang').select('''
-    id,
-    status_dibuang,
-    profile(
-      nama_lengkap
-    )
-    ''').eq('status_dibuang', "Belum diserahkan").eq('pilihan_antar_jemput', "diantar");
 
   @override
-  void initState()  {
+  void initState() {
+    _getSampahDibuangList();
     _tes();
     super.initState();
   }
 
   Future<void> _tes() async {
-    print(await sampahDibuang);
+    print(await _getSampahDibuangList());
+  }
+
+  Future<List<Map<String, dynamic>>> _getSampahDibuangList() async {
+    final droppoinId = await _getDroppoinId();
+    final response = await supabase
+      .from('sampah_dibuang')
+      .select('''
+    id,
+    status_dibuang,
+    profile(
+      nama_lengkap
+    )
+    ''')
+      .eq('status_dibuang', "Belum diserahkan")
+      .eq('pilihan_antar_jemput', "diantar")
+      .eq("droppoin_id", droppoinId);
+
+    return response;
+  }
+
+  Future<num> _getDroppoinId() async {
+    final response = await supabase
+        .from('profile_droppoin')
+        .select('id')
+        .eq('email', supabase.auth.currentUser!.email!)
+        .single()
+        .limit(1);
+    return response['id'];
   }
 
   Future<void> _konfirmasi(num id) async {
@@ -33,12 +55,6 @@ class _SampahDibuangPageState extends State<SampahDibuangPage> {
         .from('sampah_dibuang')
         .update({'status_dibuang': 'Sudah diserahkan'}).eq('id', id);
 
-    setState(() {
-      sampahDibuang = supabase.from('sampah_dibuang').select('''
-        id,
-        status_dibuang
-        ''').eq('status_dibuang', "Belum diserahkan").eq('pilihan_antar_jemput', "diantar");
-    });
   }
 
   @override
@@ -48,8 +64,8 @@ class _SampahDibuangPageState extends State<SampahDibuangPage> {
         children: [
           Column(
             children: [
-              FutureBuilder(
-                future: sampahDibuang,
+              FutureBuilder<List<Map<String, dynamic>>>(
+                future: _getSampahDibuangList(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
@@ -73,7 +89,8 @@ class _SampahDibuangPageState extends State<SampahDibuangPage> {
                                         children: [
                                           Text(
                                               "Id: ${itemSampahDibuang['id'].toString()}"),
-                                          Text(itemSampahDibuang['profile']['nama_lengkap']),
+                                          Text(itemSampahDibuang['profile']
+                                              ['nama_lengkap']),
                                           const Text("Sampah belum diterima"),
                                         ],
                                       ),

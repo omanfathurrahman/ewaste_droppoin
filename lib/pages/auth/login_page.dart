@@ -22,8 +22,7 @@ class LoginPageState extends State<LoginPage> {
     );
     user = res.user;
     // ignore: use_build_context_synchronously
-    context.go('/sampahDibuang');
-
+    context.go('/afterLoginLayout');
   }
 
   @override
@@ -37,8 +36,10 @@ class LoginPageState extends State<LoginPage> {
           ),
           child: Form(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Text("Masuk ke akun", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
                 TextField(
                   controller: _emailController,
                   decoration: const InputDecoration(
@@ -53,16 +54,19 @@ class LoginPageState extends State<LoginPage> {
                   obscureText: true,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    final email = _emailController.text;
-                    final password = _passwordController.text;
-                    _login(email, password);
-                    if (user != null) {
-                      context.go('/sampahDibuang');
-                    }
-                  },
-                  child: const Text('Login'),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      String email = _emailController.text;
+                      String password = _passwordController.text;
+                      _login(email, password);
+                      if (user != null) {
+                        context.go('/sampahDibuang');
+                      }
+                    },
+                    child: const Text('Login'),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 Row(

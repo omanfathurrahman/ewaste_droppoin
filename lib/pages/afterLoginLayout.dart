@@ -1,3 +1,5 @@
+import 'package:ewaste_droppoin/pages/profile/profile.dart';
+
 import 'sampah_dibuang/sampah_dibuang.dart';
 import 'package:flutter/material.dart';
 
@@ -21,11 +23,13 @@ class _AfterLoginLayoutState extends State<AfterLoginLayout> {
         title: [
           const Text('Sampah Dibuang'),
           const Text('Sampah Didonasikan'),
+          const Text('Profile'),
         ][currentPageIndex],
       ),
       body: [
         const SampahDibuangPage(),
         const SampahDidonasikanPage(),
+        Profile(),
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -39,6 +43,10 @@ class _AfterLoginLayoutState extends State<AfterLoginLayout> {
           NavigationDestination(
             icon: Icon(Icons.wifi_1_bar),
             label: 'Dibuang',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.wifi_1_bar),
+            label: 'Didonasikan',
           ),
           NavigationDestination(
             icon: Icon(Icons.wifi_1_bar),

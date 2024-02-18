@@ -22,7 +22,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-  final supabase = Supabase.instance.client;
+final supabase = Supabase.instance.client;
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
@@ -45,10 +45,6 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'afterLoginLayout',
           builder: (context, state) => const AfterLoginLayout(),
-        ),
-        GoRoute(
-          path: 'sampahDibuang',
-          builder: (context, state) => const SampahDibuangPage(),
         ),
         GoRoute(
           path: 'detailSampahDibuang/:sampahDibuangId',
