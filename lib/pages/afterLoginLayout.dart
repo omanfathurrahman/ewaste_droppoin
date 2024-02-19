@@ -1,9 +1,9 @@
 import 'package:ewaste_droppoin/pages/profile/profile.dart';
 
-import 'sampah_dibuang/sampah_dibuang.dart';
+import 'buang/sampah_dibuang.dart';
 import 'package:flutter/material.dart';
 
-import 'sampah_didonasikan/sampah_didonasikan.dart';
+import 'donasi/sampah_didonasikan.dart';
 
 class AfterLoginLayout extends StatefulWidget {
   const AfterLoginLayout({super.key});
