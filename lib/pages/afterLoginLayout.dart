@@ -50,7 +50,7 @@ class _AfterLoginLayoutState extends State<AfterLoginLayout> {
           ),
           NavigationDestination(
             icon: Icon(Icons.wifi_1_bar),
-            label: 'Didonasikan',
+            label: 'Profile',
           ),
         ],
       ),
