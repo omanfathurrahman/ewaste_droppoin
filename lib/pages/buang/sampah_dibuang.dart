@@ -55,6 +55,10 @@ class _SampahDibuangPageState extends State<SampahDibuangPage> {
         .from('sampah_dibuang')
         .update({'status_dibuang': 'Sudah diserahkan'}).eq('id', id);
 
+    setState(() {
+      
+    });
+
   }
 
   @override
@@ -111,7 +115,7 @@ class _SampahDibuangPageState extends State<SampahDibuangPage> {
                                               _konfirmasi(
                                                   itemSampahDibuang['id']);
                                             },
-                                            child: const Text("selesai"),
+                                            child: const Text("Terima"),
                                           ),
                                         ],
                                       ),
